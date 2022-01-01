@@ -48,42 +48,16 @@
 \pagenumbering{roman}
 \makemstitle % M.S. thesis
 \makeapprovalpage
-\begin{acknowledgements}
-Acknowledgements come here...
-\end{acknowledgements}
-\begin{abstract}
-One page abstract will come here.  
-\end{abstract}
-\begin{ozet}
-Bir sayfa uzunluğunda özet gelecektir.
-\end{ozet}
+\input{chapters/preambles/acknowledgements}
+\input{chapters/abstract/abstract}
+\input{chapters/abstract/abstract_tr}
+
 \tableofcontents
 \listoffigures
 \listoftables
-\begin{symbols}
-% The title will be typeset as "LIST OF SYMBOLS".
-%
-% Use a separate \sym command for each symbols definition.
-% First Latin symbols in alphabetical order
+\input{chapters/preambles/symbols}
 
-\sym{$a_{ij}$}{Description of $a_{ij}$}
-\sym{$\mathbf{A}$}{State transition matrix of a hidden Markov model}
-% Then Greek symbols in alphabetical order
-\sym{}{}
-\sym{$\alpha$}{Blending parameter \textit{or} scale}
-\sym{$\beta_t(i)$}{Backward variable}
-\sym{$\Theta$}{Parameter set}
-\sym{ }{}
-
-\end{symbols}
-
-\begin{abbreviations}
- % Abbreviations in alphabetical order
-\sym{2D}{Two Dimensional}
-\sym{3D}{Three Dimensional}
-\sym{AAM}{Active Appearance Model}
-\sym{ASM}{Active Shape Model}
-\end{abbreviations}
+\input{chapters/preambles/abbreviations}
 
 
 \input{chapters/introduction/introduction.tex}
