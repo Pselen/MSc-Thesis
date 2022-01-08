@@ -7,7 +7,23 @@
 \usepackage[bottom]{footmisc}
 \usepackage{cite}
 \usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{enumitem}
+\usepackage{svg}
+\usepackage{dirtree}
+\usepackage{listings}
+\lstset{
+% numbers=right, 
+% numberstyle=\small, 
+% numbersep=8pt, 
+frame = single, 
+% language=Pascal, 
+% framexleftmargin=15pt
+}
 \graphicspath{{figures/}} % Graphics will be here
 
 \usepackage{multirow}
@@ -23,24 +39,24 @@
 \newtheorem{cor}[thm]{Corollary}
 % COVER PAGE
 \title{EMPOWERING HETEROGENEOUS NETWORKS FOR DRUG-TARGET AFFINITY PREDICTION}
-\turkcebaslik{\.{I}LA\c{C}-HEDEF BA\u{G}LILIK \.{I}LG\.{I}S\.{I} TAHM\.{I}N\.{I} \.{I}\c{C}\.{I}N HETEROJEN A\u{G}LARI GÜ\c{C}LEND\.{I}RME }
+\turkcebaslik{\.{I}LA\c{C}-HEDEF BA\u{G}LILIK \.{I}LG\.{I}S\.{I} TAHM\.{I}N\.{I} \.{I}\c{C}\.{I}N HETEROJEN A\u{G}LARI G\"{U}\c{C}LEND\.{I}RME }
 \degree{B.S., Computer Engineering, Marmara University, 2018\\
-	M.S., Computer Engineering, Boğaziçi University, 2021}
+	M.S., Computer Engineering, Boğaziçi University, 2022}
 \author{Selen Parlar}
 \program{Computer Engineering}
-\subyear{2021}
+\subyear{2022}
 
 % APPROVED BY PAGE
 \supervisor{Assoc. Prof. Arzucan \"{O}zg\"{u}r}
-%\cosuperi{Title and Name of Cosupervisor I}
-%\cosuperii{Title and Name of Cosupervisor II}
-% \examineri{Assist. Prof. H. Birkan Y{\i}lmaz}
-% \examinerii{Assist. Prof. \"{O}znur Ta\c{s}tan}
-\examineri{Name Surname, Ph.D.}
-\examineri{Name Surname, Ph.D.}
+\cosuperi{Assoc. Prof. Elif \"{O}zk{\i}r{\i}ml{\i} \"{O}lmez}
+\examineri{Prof. Nilg\"{u}n L\"{u}tfiye Karal{\i}\quad\quad\quad}
+\examinerii{Prof. Tunga G\"{u}ng\"{o}r}
+% \examineri{Name Surname, Ph.D.}
+% \examineri{Name Surname, Ph.D.}
 %\examineriv{}
 %\examinerv{}
-\dateofapproval{DD.MM.YYYY}
+\dateofapproval{27.01.2022}
+
 
 
 \begin{document}
@@ -48,6 +64,8 @@
 \pagenumbering{roman}
 \makemstitle % M.S. thesis
 \makeapprovalpage
+
+
 \input{chapters/preambles/acknowledgements}
 \input{chapters/abstract/abstract}
 \input{chapters/abstract/abstract_tr}
@@ -62,6 +80,7 @@
 
 \input{chapters/introduction/introduction.tex}
 %Start with an introduction...
+\input{chapters/biomolecule_representations/biomolecule_representation}
 \input{chapters/literaturereview/literature.tex}
 %\include{experiments_results}
 \input{chapters/background/background}
@@ -171,42 +190,42 @@ $$
 as required.
 \end{proof}
 Finally, we will put a sample algorithm (PCA algorithm) using the
-relevant package in a figure as shown in Figure \ref{alg:pca} and
+% relevant package in a figure as shown in Figure \ref{alg:pca} and
 sample equations.
 
-\begin{figure}[htbp]
-\label{alg:pca}
-\begin{center}
-\framebox[6.0in]{\begin{minipage}[t]{5.9in}
-\begin{algorithmic}
-\STATE
-\STATE \textbf{Require}  $\mathbf{s_i},\ i=1,2,\dots,N$ are normalized
+% \begin{figure}[htbp]
+% \label{alg:pca}
+% \begin{center}
+% \framebox[6.0in]{\begin{minipage}[t]{5.9in}
+% \begin{algorithmic}
+% \STATE
+% \STATE \textbf{Require}  $\mathbf{s_i},\ i=1,2,\dots,N$ are normalized
  
-\STATE Compute the mean  $\mathbf{\bar{s}}$ using Eq. \ref{eq:mean};
-\STATE Form the $N\times2L$ matrix $\mathbf{Q}$ as defined in Eq.
-\ref{eq:q};
-\IF{ $N < 2\times L$}
-\STATE $\mathbf{Q} \Leftarrow \mathbf{Q}^T$ ;
-\ENDIF
-\STATE Compute the covariance matrix $\mathbf{C}_s$ using Eq.
-\ref{eq:cov_matrix};\STATE Decompose $\mathbf{C}_s$
- to its eigenvectors   $\mathbf{e}_k$  and eigenvalues $\lambda_k$
-satisfying Eq. \ref{eq:pca};
-\IF{ $N < 2\times L$}
-\FOR{$k=1$ to $K$}
-\STATE $\mathbf{e}_k \Leftarrow \mathbf{Q}\mathbf{e}_k $ ;
-\STATE $\mathbf{e}_k \Leftarrow \mathbf{e}_k/||\mathbf{e}_k|| $
-(normalization);
-\ENDFOR
-\ENDIF
-\STATE
-\end{algorithmic}
-\end{minipage}}
-\end{center}
-\caption[Principal Component Analysis Algorithm]{Principal Component
-Analysis Algorithm.}
-% \vskip
-\end{figure}
+% \STATE Compute the mean  $\mathbf{\bar{s}}$ using Eq. \ref{eq:mean};
+% \STATE Form the $N\times2L$ matrix $\mathbf{Q}$ as defined in Eq.
+% \ref{eq:q};
+% \IF{ $N < 2\times L$}
+% \STATE $\mathbf{Q} \Leftarrow \mathbf{Q}^T$ ;
+% \ENDIF
+% \STATE Compute the covariance matrix $\mathbf{C}_s$ using Eq.
+% \ref{eq:cov_matrix};\STATE Decompose $\mathbf{C}_s$
+%  to its eigenvectors   $\mathbf{e}_k$  and eigenvalues $\lambda_k$
+% satisfying Eq. \ref{eq:pca};
+% \IF{ $N < 2\times L$}
+% \FOR{$k=1$ to $K$}
+% \STATE $\mathbf{e}_k \Leftarrow \mathbf{Q}\mathbf{e}_k $ ;
+% \STATE $\mathbf{e}_k \Leftarrow \mathbf{e}_k/||\mathbf{e}_k|| $
+% (normalization);
+% \ENDFOR
+% \ENDIF
+% \STATE
+% \end{algorithmic}
+% \end{minipage}}
+% \end{center}
+% \caption[Principal Component Analysis Algorithm]{Principal Component
+% Analysis Algorithm.}
+% % \vskip
+% \end{figure}
 
 \begin{align} 
 \mathbf{\bar{s}} & =\frac{1}{N} \sum_{i=1}^N \mathbf{s}_i
@@ -231,8 +250,8 @@ Analysis Algorithm.}
 
 \subsection{Example of First Subheadings}
 Some text here
-\subsubsection{Example of Second Subheadings}
-Some text here too.
+% \subsubsection{Example of Second Subheadings}
+% Some text here too.
 \chapter{CONCLUSION}
 \label{chapter:conclusion}
 
