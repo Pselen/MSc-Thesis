@@ -1,0 +1,35 @@
+\begin{table}
+\centering
+\caption{MSE and RMSE scores of DDS models on test sets of BDB.}
+\begin{tabular}{|l|l|c|c|} 
+\hline
+\textbf{Model} & \textbf{Test~Set} & \textbf{MSE} & \textbf{RMSE} \\ 
+\hline
+DeepDTA & \multirow{3}{*}{Warm} & \textbf{0.288 (0.021)} & \textbf{0.536 (0.012)} \\ 
+\cline{1-1}\cline{3-4}
+Model (3) &  & 0.308 (0.018) & 0.555 (0.016) \\ 
+\cline{1-1}\cline{3-4}
+Model (4) &  & 0.304 (0.016) & 0.551 (0.014) \\ 
+\hline
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & 1.448 (0.939) & 1.152 (0.348) \\ 
+\cline{1-1}\cline{3-4}
+Model (3) &  & 1.903 (0.865) & 1.348 (0.292) \\ 
+\cline{1-1}\cline{3-4}
+Model (4) &  & \textbf{1.360 (0.501)} & \textbf{1.149 (0.199)} \\ 
+\hline
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Protein\end{tabular}} & 1.085 (0.146) & 1.040 (0.146) \\ 
+\cline{1-1}\cline{3-4}
+Model (3) &  & \textbf{1.037 (0.150)} & \textbf{1.016 (0.073)} \\ 
+\cline{1-1}\cline{3-4}
+Model (4) &  & 1.056 (0.150) & 1.025 (0.074) \\ 
+\hline
+DeepDTA & \multirow{3}{*}{Cold} & 2.007 (1.223) & \textbf{1.356 (0.410)} \\ 
+\cline{1-1}\cline{3-4}
+Model (3) &  & 2.380 (1.050) & 1.510 (0.316) \\ 
+\cline{1-1}\cline{3-4}
+Model (4) &  & \textbf{1.957 (0.908)} & 1.367 (0.299) \\
+\hline
+\end{tabular}
+\label{tab:dds_mse_rmse}
+\end{table}
+

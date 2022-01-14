@@ -1,0 +1,35 @@
+\begin{table}
+\centering
+\caption{MSE and RMSE scores of PPI models on test sets of BDB.}
+\label{tab:ddi_ci_r2}
+\begin{tabular}{|l|l|c|c|} 
+\hline
+\begin{tabular}[c]{@{}l@{}}\textbf{Model}\end{tabular} & \textbf{Test~Set} & \textbf{MSE} & \textbf{RMSE} \\ 
+\hline
+DeepDTA & \multirow{3}{*}{Warm} & \textbf{0.288 (0.021)} & 0.304 (0.015) \\ 
+\cline{1-1}\cline{3-4}
+Model (5) &  & 0.304 (0.015) & 0.291 (0.019) \\ 
+\cline{1-1}\cline{3-4}
+Model (6) &  & 0.291 (0.019) & 0.539 (0.017) \\ 
+\hline
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & 1.448 (0.939) & 1.152 (0.348) \\ 
+\cline{1-1}\cline{3-4}
+Model (5) &  & 1.539 (1.044) & 1.185 (0.366) \\ 
+\cline{1-1}\cline{3-4}
+Model (6) &  & \textbf{1.316 (0.433)} & \textbf{1.133 (0.179)} \\ 
+\hline
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Protein\end{tabular}} & 1.085 (0.146) & 1.040 (0.146) \\ 
+\cline{1-1}\cline{3-4}
+Model (5) &  & 1.053 (0.175) & 1.023 (0.083) \\ 
+\cline{1-1}\cline{3-4}
+Model (6) &  & \textbf{1.081 (0.152)} & \textbf{1.037 (0.072)} \\ 
+\hline
+DeepDTA & \multirow{3}{*}{Cold} & 2.007 (1.223) & 1.356 (0.410) \\ 
+\cline{1-1}\cline{3-4}
+Model (5) &  & 1.936 (1.101) & 1.344 (0.360) \\ 
+\cline{1-1}\cline{3-4}
+Model (6) &  & \textbf{1.824 (0.731)} & \textbf{1.326 (0.256)} \\
+\hline
+\end{tabular}
+\label{tab:ppi_mse_rmse}
+\end{table}

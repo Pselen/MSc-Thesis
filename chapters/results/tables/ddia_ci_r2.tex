@@ -1,0 +1,35 @@
+\begin{table}
+\centering
+\caption{CI and R$^2$ scores of DDiA models on test sets of BDB.}
+\label{tab:ddi_ci_r2}
+\begin{tabular}{|l|l|c|c|} 
+\hline
+\textbf{Model} & \textbf{Test~Set} & \textbf{CI} & \textbf{R\textsuperscript{2}} \\ 
+\hline
+DeepDTA & \multirow{3}{*}{Warm} & \textbf{0.888 (0.009)} & \textbf{0.781 (0.028)} \\ 
+\cline{1-1}\cline{3-4}
+Model (9) &  & 0.885 (0.009) & 0.773 (0.015) \\ 
+\cline{1-1}\cline{3-4}
+Model (10) &  & 0.885 (0.006) & 0.773 (0.005) \\ 
+\hline
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & 0.687 (0.096) & 0.039 (0.243) \\ 
+\cline{1-1}\cline{3-4}
+Model (9) &  & \textbf{0.704 (0.039)} & -0.082 (0.377) \\ 
+\cline{1-1}\cline{3-4}
+Model (10) &  & 0.699 (0.045) & \textbf{0.042 (0.120)} \\ 
+\hline
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Protein\end{tabular}} & 0.759 (0.006) & 0.315 (0.049) \\ 
+\cline{1-1}\cline{3-4}
+Model (9) &  & 0.774 (0.010) & 0.335 (0.077) \\ 
+\cline{1-1}\cline{3-4}
+Model (10) &  & \textbf{0.777 (0.020)} & \textbf{0.348 (0.067)} \\ 
+\hline
+DeepDTA & \multirow{3}{*}{Cold} & 0.554 (0.047) & -0.154 (0.164) \\ 
+\cline{1-1}\cline{3-4}
+Model (9) &  & 0.616 (0.077) & -0.183 (0.363) \\ 
+\cline{1-1}\cline{3-4}
+Model (10) &  & \textbf{0.618 (0.042)} & \textbf{-0.084 (0.139)} \\
+\hline
+\end{tabular}
+\label{tab:ddia_ci_r2}
+\end{table}
