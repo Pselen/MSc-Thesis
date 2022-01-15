@@ -1,34 +1,37 @@
+% \usepackage{multirow}
+
+
 \begin{table}
 \centering
 \caption{CI and R$^2$ scores of PPS models on test sets of BDB.}
 \label{tab:ddi_ci_r2}
 \begin{tabular}{|l|l|c|c|} 
 \hline
-\textbf{Model} & \textbf{Test~Set} & \textbf{CI} & \textbf{R\textsuperscript{2}} \\ 
+\begin{tabular}[c]{@{}l@{}}\\\textbf{Model}\end{tabular} & \textbf{Test~Set} & \textbf{CI} & \textbf{R\textsuperscript{2}} \\ 
 \hline
-DeepDTA & \multirow{3}{*}{Warm} & \textbf{0.888 (0.009)} & \textbf{0.781 (0.028)} \\ 
+DeepDTA & \multirow{3}{*}{Warm} & 0.888 (0.009) & 0.781 (0.028) \\ 
 \cline{1-1}\cline{3-4}
-Model (7) &  & 0.885 (0.004) & 0.761 (0.012) \\ 
+Model (7) &  & \textbf{0.893 (0.006)} & 0.775 (0.018) \\ 
 \cline{1-1}\cline{3-4}
-Model (8) &  & 0.887 (0.005) & 0.773 (0.013) \\ 
+Model (8) &  & 0.892 (0.008) & \textbf{0.785 (0.019)} \\ 
 \hline
-DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & \textbf{0.687 (0.096)} & \textbf{0.039 (0.243)} \\ 
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & 0.687 (0.096) & 0.039 (0.243) \\ 
 \cline{1-1}\cline{3-4}
-Model (7) &  & 0.677 (0.080) & -0.142 (0.138) \\ 
+Model (7) &  & 0.675 (0.083) & -0.067 (0.211) \\ 
 \cline{1-1}\cline{3-4}
-Model (8) &  & 0.662 (0.076) & -0.177 (0.267) \\ 
+Model (8) &  & \textbf{0.728 (0.046)} & \textbf{0.155 (0.162)} \\ 
 \hline
 DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Protein\end{tabular}} & 0.759 (0.006) & 0.315 (0.049) \\ 
 \cline{1-1}\cline{3-4}
-Model (7) &  & 0.768 (0.015) & 0.333 (0.054) \\ 
+Model (7) &  & \textbf{0.783 (0.010)} & \textbf{0.362 (0.047)} \\ 
 \cline{1-1}\cline{3-4}
-Model (8) &  & \textbf{0.775 (0.012)} & \textbf{0.358 (0.090)} \\ 
+Model (8) &  & 0.773 (0.022) & 0.339 (0.086) \\ 
 \hline
-DeepDTA & \multirow{3}{*}{Cold} & 0.554 (0.047) & \textbf{-0.154 (0.164)} \\ 
+DeepDTA & \multirow{3}{*}{Cold} & 0.554 (0.047) & -0.154 (0.164) \\ 
 \cline{1-1}\cline{3-4}
-Model (7) &  & 0.581 (0.033) & -0.316 (0.198) \\ 
+Model (7) &  & 0.557 (0.036) & -0.260 (0.090) \\ 
 \cline{1-1}\cline{3-4}
-Model (8) &  & \textbf{0.558 (0.047)} & -0.307 (0.193) \\
+Model (8) &  & \textbf{0.598 (0.061)} & \textbf{-0.065 (0.297)} \\
 \hline
 \end{tabular}
 \label{tab:pps_ci_r2}

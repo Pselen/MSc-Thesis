@@ -1,34 +1,37 @@
+% \usepackage{multirow}
+
+
 \begin{table}
 \centering
 \caption{MSE and RMSE scores of PPI models on test sets of BDB.}
 \label{tab:ddi_ci_r2}
 \begin{tabular}{|l|l|c|c|} 
 \hline
-\begin{tabular}[c]{@{}l@{}}\textbf{Model}\end{tabular} & \textbf{Test~Set} & \textbf{MSE} & \textbf{RMSE} \\ 
+\begin{tabular}[c]{@{}l@{}}\\\textbf{Model}\end{tabular} & \textbf{Test~Set} & \textbf{MSE} & \textbf{RMSE} \\ 
 \hline
-DeepDTA & \multirow{3}{*}{Warm} & \textbf{0.288 (0.021)} & 0.304 (0.015) \\ 
+DeepDTA & \multirow{3}{*}{Warm} & \textbf{0.288 (0.021)} & \textbf{0.536 (0.012)} \\ 
 \cline{1-1}\cline{3-4}
-Model (5) &  & 0.304 (0.015) & 0.291 (0.019) \\ 
+Model (5) &  & 0.299 (0.020) & 0.546 (0.018) \\ 
 \cline{1-1}\cline{3-4}
-Model (6) &  & 0.291 (0.019) & 0.539 (0.017) \\ 
+Model (6) &  & 0.295 (0.017) & 0.543 (0.015) \\ 
 \hline
-DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & 1.448 (0.939) & 1.152 (0.348) \\ 
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & \textbf{1.448 (0.939)} & \textbf{1.152 (0.348)} \\ 
 \cline{1-1}\cline{3-4}
-Model (5) &  & 1.539 (1.044) & 1.185 (0.366) \\ 
+Model (5) &  & 1.561 (1.059) & 1.192 (0.373) \\ 
 \cline{1-1}\cline{3-4}
-Model (6) &  & \textbf{1.316 (0.433)} & \textbf{1.133 (0.179)} \\ 
+Model (6) &  & 1.542 (1.146) & 1.179 (0.390) \\ 
 \hline
 DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Protein\end{tabular}} & 1.085 (0.146) & 1.040 (0.146) \\ 
 \cline{1-1}\cline{3-4}
-Model (5) &  & 1.053 (0.175) & 1.023 (0.083) \\ 
+Model (5) &  & \textbf{1.069 (0.144)} & \textbf{1.031 (0.071)} \\ 
 \cline{1-1}\cline{3-4}
-Model (6) &  & \textbf{1.081 (0.152)} & \textbf{1.037 (0.072)} \\ 
+Model (6) &  & 1.109 (0.176) & 1.050 (0.083) \\ 
 \hline
-DeepDTA & \multirow{3}{*}{Cold} & 2.007 (1.223) & 1.356 (0.410) \\ 
+DeepDTA & \multirow{3}{*}{Cold} & \textbf{2.007 (1.223)} & \textbf{1.356 (0.410)} \\ 
 \cline{1-1}\cline{3-4}
-Model (5) &  & 1.936 (1.101) & 1.344 (0.360) \\ 
+Model (5) &  & 2.186 (1.310) & 1.419 (0.415) \\ 
 \cline{1-1}\cline{3-4}
-Model (6) &  & \textbf{1.824 (0.731)} & \textbf{1.326 (0.256)} \\
+Model (6) &  & 2.288 (1.303) & 1.457 (0.407) \\
 \hline
 \end{tabular}
 \label{tab:ppi_mse_rmse}
