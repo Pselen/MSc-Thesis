@@ -69,8 +69,69 @@ As shown above, metapath2vec uses random walks guided by meta-paths to generate 
 
 Based on metapath2vec, several variants have been proposed. For instance, BHIN2vec \cite{lee2019bhin2vec} proposes an extension to the skip-gram technique in order to balance the influence different relation types on node embeddings. HHNE \cite{wang2019hyperbolic} performs random walks in hyperbolic spaces. Another method, Hin2vec \cite{fu2017hin2vec}, combines first-order and high-order relations to capture the heterogeneity of graph and carries out multiple relation prediction tasks to jointly learn the node embeddings. In this thesis we employ metapath2vec since it is simpler and convenient to apply to large heterogeneous graph. Moreover, its code is open, so it is freely available to use and easy to adapt.\footnote{Code available at: https://github.com/apple2373/metapath2vec}
 
-\section{Language-Based Representation Vector Learning}
+\section{Language Model-Based Representation Vector Learning}
+Conventional Natural Language Processing (NLP) requires feature engineering, thus considerable expertise. Likewise, representation learning aims to learn representations of row data automatically to be fed as input to classification or prediction tasks as useful information. A typical example of representation learning approaches is deep learning \cite{goodfellow2016deep}. Deep learning algorithms represent each object with a low-dimensional real-valued dense vectors, named as distributed representation or embedding. When two objects are projected into a unified low-dimensional semantic space, geometric distance between these objects in the semantic space indicates their semantic relatedness. Therefore, the semantic meaning of an object is related to its close neighbors \cite{liu2020representation}.  
+
+One of the exiting approaches of distributed representation in NLP is Neural Probabilistic Language Model (NPLM) \cite{bengio2001neural}. A language model is created to predict the joint probability of word sequences. In NPLM, a distributed vector is assigned for each word at first, then using a neural network, the next word is predicted. In the end, it learns how to model the joint probability of sentences and outputs the word embeddings as learnt parameters. Some of the famous methods inspired by NPLM are word2vec \cite{mikolov2013distributed}, GloVe \cite{bojanowski2017enriching}, and fastText \cite{pennington2014glove}, all of which are very efficient to train. 
+
+With the increasing number of data in corpus and the parameters ELMo \cite{devlin2018bert} and BERT \cite{peters2018deep} models have become more popular. Rather than assigning a fixed distributed vector to each word as in word2vec, ELMo and BERT use multilayer neural networks to calculate dynamic representations of words. Most importantly, they consider a word's context while learning the representation. BERT-like models are also called as Pre-trained Language Models (PLM) because they are pre-trained through modeling objective on large corpora and fine-tuned the model on downstream tasks. 
+
+Due to experiments that show PLMs encode a linguistic knowledge and patterns into their multilayer network parameters we employed these models in this thesis \cite{liu2019linguistic, hewitt2019structural}. Similar to the natural languages, SMILES and amino acid sequences are typical unstructured information, and to initialize our graph-based representation learning models we leveraged transformer variants pre-trained on large datasets such as ProtBERT \cite{Elnaggar2020.07.12.199554}, ChemBERTa \cite{chithrananda2020chemberta}, and BioBERT \cite{lee2020biobert}. 
+
+BERT is a bi-directional transformer that can learn a language representation from a large amount of unlabeled textual data and then fine-tune it for certain machine learning applications. ProtBERT \cite{prot_bert, Elnaggar2020.07.12.199554} is a protein sequence-pre-trained model with a masked language modeling objective. It's based on the BERT model, which is self-supervised and pre-trained on a vast corpus of protein sequences. This implies it was pre-trained on raw protein sequences only, with no human labeling, and used an automatic mechanism to generate inputs and labels from those sequences. To initialize the distributional representations of proteins we leverage the ProtBERT model. 
+
+We adopted the ChemBERTa \cite{chithrananda2020chemberta} model, which was pre-trained on 10M PubChem substances using BPE tokenization \cite{sennrich2015neural}, to initialize the distributional representations of chemicals. ChemBERTa is based on the transformer and has been pre-trained with masked language modeling, similar to ProtBERT.
+
+To initialize the distributional representations of diseases and side effects, we employed the BioBERT \cite{lee2020biobert} model. It's a domain-specific language representation model pre-trained on large-scale biomedical corpora, same like the preceding models.
 
 \section{Affinity Prediction}
+Deep learning approaches have outperformed machine learning because they use network-based methods that aren't reliant on the availability of the 3D protein structure \cite{lounkine2012large}. Some deep learning approaches for measuring drug-target affinity prediction include DeepDTA \cite{ozturk2018deepdta}, PADME \cite{feng2018padme}, WideDTA \cite{ozturk2019widedta}, and DeepAffinity \cite{karimi2019deepaffinity}. DeepDTA receives drug data in the form of SMILES, in which the amino acid sequence for protein input data is entered. WideDTA is a deep learning method based on multi-layered convolutional neural networks for determining binding affinity that uses ligand SMILES, amino acid sequences, ligand maximum common substructure (LMCS), and protein domains and motifs as input data \cite{gao2018interpretable}.
+
+The DeepDTA model revealed the difficulties of modeling proteins using their sequences, which was one of the study's most intriguing findings \cite{ozturk2018deepdta}. In the affinity prediction task, the CNN module was not as good at describing proteins when modelled separately by CNN-based modules as it was with SMILES. To address this issue, WideDTA model utilize the protein sequence and ligand SMILES string by representing them as a set of words. Moreover, to provide a better representation of the interaction, the WideDTA model incorporated many kinds of text-based information. Although the addition of text-based information such as protein domain and motif information, the protein representation and thus prediction performance, were unable to create a statistically significant gain in predictive power. Inspired by this, we expand DeepDTA model by integrating more information and create better and semantically meaningful representations for both chemicals and proteins.
+
 
 \section{Evaluation}
+
+To evaluate the performance of these models, we utilize four metrics: CI \cite{gonen2005concordance}, $R^2$, MSE, and RMSE. These three measures will be introduced in the following.
+
+\subsection{Concordance Index (CI)}
+In DTA prediction task, the CI can be utilized as an evaluation metric for prediction accuracy, as described in KronRLS \cite{pahikkala2015toward}. For continuous values, CI is a ranking metric. The CI is used to determine whether two random drug-target combinations' projected binding affinity values were predicted in the same order as their actual values or not. The CI spans from 0.5 to 1.0, with 1.0 indicating perfect prediction accuracy and 0.5 indicating a random predictor. The following formula is used to calculate the CI:
+\begin{equation}
+    CI =  \frac{1}{Z}\sum_{s_{i} > s_{j}}^{}h(b_{i}-b_{j})
+\end{equation}
+
+where $b_i$ is the prediction value for the larger affinity $s_i$, $b_j$ is the prediction value for the smaller affinity $s_j$, $Z$ is a normalization constant equal to the number of data pairs with different label values. The Heaviside function, $h(x)$, is \cite{gonen2005concordance} step function, which is discontinues and defines as:
+
+\begin{equation}
+    h(x) = 
+    \begin{cases}
+        1, & \text{$X>0$}\\
+        0.5, & \text{$X=0$}\\
+        0, & \text{$X<0$}
+    \end{cases}
+\end{equation}
+
+\subsection{R-squared $R^2$ }
+R-squared $R^2$ is a statistical measure that quantifies the proportion of variation explained by an independent variable or variables in a regression model for a dependent variable. $R^2$ reveals how much the variation of one variable explains the variance of the second variable, whereas correlation explains the strength of the relationship between an independent and dependent variable. So, if a model's $R^2$ is 0.5, the model's inputs can explain nearly half of the observed variation. Unlike MSE and RMSE, $R^2$ is a scale-invariant prediction quality metric. The following equation is used to compute $R^2$:
+
+\begin{equation}
+    R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - p_i)^{2}}{\sum_{i=1}^{n} (y_i - \bar{y})^{2}}
+\end{equation}
+
+where n corresponds to the number of samples, $\bar{y}$ is the mean of the actual values, $y_i$ is the actual data, and the $p_i$ is the prediction.
+
+\subsection{Meas Square Error (MSE)}
+The MSE is a widely used statistic for continuous prediction error. It's used in regression tasks to see how near the fitted line is to the actual data points, which is shown by connecting the estimated values. We use the MSE as a metric because DTBA is also a regression task:
+
+\begin{equation}
+    MSE = \frac{1}{n}\sum_{i=1}^{n} (p_i - y_i)^{2}
+\end{equation}
+
+where $n$ corresponds to the number of samples, $y_i$ is the actual data, and $p_i$ is the prediction. 
+
+\subsection{Root Mean Square Error (RMSE)}
+One of the regressor measurements is RMSE. It's the average distance between data points and the fitted line, calculated as the square root of MSE:
+
+\begin{equation}
+    RMSE = \sqrt{MSE}
+\end{equation}

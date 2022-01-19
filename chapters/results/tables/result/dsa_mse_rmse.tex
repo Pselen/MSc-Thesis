@@ -1,0 +1,38 @@
+% \usepackage{multirow}
+
+
+\begin{table}
+\centering
+\caption{MSE and RMSE scores of DSA models on test sets of BDB.}
+\label{tab:ddi_ci_r2}
+\begin{tabular}{|l|l|c|c|} 
+\hline
+\begin{tabular}[c]{@{}l@{}}\\\\\textbf{Model}\end{tabular} & \textbf{Test~Set} & \textbf{CI} & \textbf{R\textsuperscript{2}} \\ 
+\hline
+DeepDTA & \multirow{3}{*}{Warm} & 0.288 (0.021) & 0.536 (0.012) \\ 
+\cline{1-1}\cline{3-4}
+Model (15) &  & \textbf{0.275 (0.022)} & \textbf{0.524 (0.021)} \\ 
+\cline{1-1}\cline{3-4}
+Model (16) &  & 0.295 (0.021) & 0.543 (0.019) \\ 
+\hline
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & 1.448 (0.939) & \textbf{1.152 (0.348)} \\ 
+\cline{1-1}\cline{3-4}
+Model (15) &  & \textbf{1.443 (0.461)} & 1.186 (0.190) \\ 
+\cline{1-1}\cline{3-4}
+Model (16) &  & 1.621 (0.555) & 1.258 (0.199) \\ 
+\hline
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Protein\end{tabular}} & 1.085 (0.146) & 1.040 (0.146) \\ 
+\cline{1-1}\cline{3-4}
+Model (15) &  & \textbf{1.015 (0.131)} & \textbf{1.005 (0.064)} \\ 
+\cline{1-1}\cline{3-4}
+Model (16) &  & 1.076 (0.209) & 1.032 (0.102) \\ 
+\hline
+DeepDTA & \multirow{3}{*}{Cold} & 2.007 (1.223) & \textbf{1.356 (0.410)} \\ 
+\cline{1-1}\cline{3-4}
+Model (15) &  & \textbf{1.943 (0.647)} & 1.375 (0.228) \\ 
+\cline{1-1}\cline{3-4}
+Model (16) &  & 2.241 (0.905) & 1.470 (0.281) \\
+\hline
+\end{tabular}
+\label{tab:dsa_mse_rmse}
+\end{table}

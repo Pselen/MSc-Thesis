@@ -1,39 +1,39 @@
 % \usepackage{multirow}
 
 
-\begin{table}
+\begin{table}[H]
 \centering
-\caption{CI and R$^2$ scores of DDS models on test sets of BDB.}
+\caption{CI and R$^2$ scores of DDI models on test sets of BDB.}
 \label{tab:ddi_ci_r2}
 \begin{tabular}{|l|l|c|c|} 
 \hline
-\begin{tabular}[c]{@{}l@{}}\\\\\textbf{Model}\end{tabular} & \textbf{Test~Set} & \textbf{CI} & \textbf{R\textsuperscript{2}} \\ 
+\begin{tabular}[c]{@{}l@{}}\\\\\\\textbf{Model}\end{tabular} & \textbf{Test~Set} & \textbf{CI} & \textbf{R\textsuperscript{2}} \\ 
 \hline
 DeepDTA & \multirow{3}{*}{Warm} & 0.888 (0.009) & 0.781 (0.028) \\ 
 \cline{1-1}\cline{3-4}
-Model (3) &  & \textbf{0.893 (0.005)} & 0.787 (0.020) \\ 
+Model (1) &  & \textbf{0.896 (0.009)} & 0.777 (0.026) \\ 
 \cline{1-1}\cline{3-4}
-Model (4) &  & 0.890 (0.006) & \textbf{0.789 (0.008)} \\ 
+Model (2) &  & 0.890 (0.014) & \textbf{0.782 (0.017)} \\ 
 \hline
 DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & \textbf{0.687 (0.096)} & \textbf{0.039 (0.243)} \\ 
 \cline{1-1}\cline{3-4}
-Model (3) &  & 0.651 (0.085) & -0.139 (0.132) \\ 
+Model (1) &  & 0.664 (0.057) & -0.053 (0.210) \\ 
 \cline{1-1}\cline{3-4}
-Model (4) &  & 0.666 (0.064) & -0.102 (0.330) \\ 
+Model (2) &  & 0.640 (0.066) & -0.125 (0.180) \\ 
 \hline
 DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Protein\end{tabular}} & 0.759 (0.006) & 0.315 (0.049) \\ 
 \cline{1-1}\cline{3-4}
-Model (3) &  & \textbf{0.775 (0.018)} & \textbf{0.340 (0.082)} \\ 
+Model (1) &  & \textbf{0.779 (0.030)} & \textbf{0.375 (0.104)} \\ 
 \cline{1-1}\cline{3-4}
-Model (4) &  & 0.774 (0.015) & 0.327 (0.075) \\ 
+Model (2) &  & 0.768 (0.009) & 0.327 (0.072) \\ 
 \hline
 DeepDTA & \multirow{3}{*}{Cold} & \textbf{0.554 (0.047)} & \textbf{-0.154 (0.164)} \\ 
 \cline{1-1}\cline{3-4}
-Model (3) &  & 0.519 (0.036) & -0.390 (0.235) \\ 
+Model (1) &  & 0.554 (0.044) & -0.287 (0.184) \\ 
 \cline{1-1}\cline{3-4}
-Model (4) &  & 0.536 (0.068) & -0.274 (0.269) \\
+Model (2) &  & 0.495 (0.037) & -0.496 (0.211) \\
 \hline
 \end{tabular}
-\label{tab:dds_ci_r2}
 \end{table}
-
+\label{tab:ddi_ci_r2}
+\end{table}

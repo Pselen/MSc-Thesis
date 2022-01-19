@@ -1,0 +1,38 @@
+% \usepackage{multirow}
+
+
+\begin{table}
+\centering
+\caption{CI and R$^2$ scores of DDiPA models on test sets of BDB.}
+\label{tab:ddi_ci_r2}
+\begin{tabular}{|l|l|c|c|} 
+\hline
+\begin{tabular}[c]{@{}l@{}}\\\\\\\textbf{Model}\end{tabular} & \textbf{Test~Set} & \textbf{CI} & \textbf{R\textsuperscript{2}} \\ 
+\hline
+DeepDTA & \multirow{3}{*}{Warm} & \textbf{0.888 (0.009)} & \textbf{0.781 (0.028)} \\ 
+\cline{1-1}\cline{3-4}
+Model (13) &  & 0.878 (0.009) & 0.753 (0.020) \\ 
+\cline{1-1}\cline{3-4}
+Model (14) &  & 0.882 (0.008) & 0.755 (0.022) \\ 
+\hline
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & 0.687 (0.096) & \textbf{0.039 (0.243)} \\ 
+\cline{1-1}\cline{3-4}
+Model (13) &  & 0.664 (0.087) & -0.040 (0.097) \\ 
+\cline{1-1}\cline{3-4}
+Model (14) &  & \textbf{0.703 (0.033)} & 0.030 (0.082) \\ 
+\hline
+DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Protein\end{tabular}} & \textbf{0.759 (0.006)} & \textbf{0.315 (0.049)} \\ 
+\cline{1-1}\cline{3-4}
+Model (13) &  & 0.749 (0.018) & 0.268 (0.061) \\ 
+\cline{1-1}\cline{3-4}
+Model (14) &  & 0.752 (0.013) & 0.282 (0.073) \\ 
+\hline
+DeepDTA & \multirow{3}{*}{Cold} & 0.554 (0.047) & \textbf{-0.154 (0.164)} \\ 
+\cline{1-1}\cline{3-4}
+Model (13) &  & 0.533 (0.063) & -0.300 (0.161) \\ 
+\cline{1-1}\cline{3-4}
+Model (14) &  & \textbf{0.578 (0.050)} & -0.275 (0.123) \\
+\hline
+\end{tabular}
+\label{tab:ddipa_ci_r2}
+\end{table}

@@ -1,39 +1,38 @@
 % \usepackage{multirow}
 
 
-\begin{table}
+\begin{table}[H]
 \centering
-\caption{MSE and RMSE scores of DDS models on test sets of BDB.}
-\label{tab:dds_mse_rmse}
+\caption{MSE and RMSE scores of DDI models on test sets of BDB.}
+\label{tab:ddi_mse_rmse}
 \begin{tabular}{|l|l|c|c|} 
 \hline
 \begin{tabular}[c]{@{}l@{}}\\\textbf{Model}\end{tabular} & \textbf{Test~Set} & \textbf{MSE} & \textbf{RMSE} \\ 
 \hline
 DeepDTA & \multirow{3}{*}{Warm} & 0.288 (0.021) & 0.536 (0.012) \\ 
 \cline{1-1}\cline{3-4}
-Model (3) &  & 0.280 (0.017) & 0.529 (0.017) \\ 
+Model (1) &  & 0.295 (0.036) & 0.542 (0.033) \\ 
 \cline{1-1}\cline{3-4}
-Model (4) &  & \textbf{0.278 (0.011)} & \textbf{0.527 (0.010)} \\ 
+Model (2) &  & \textbf{0.287 (0.014)} & \textbf{0.535 (0.014)} \\ 
 \hline
 DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Ligand\end{tabular}} & \textbf{1.448 (0.939)} & \textbf{1.152 (0.348)} \\ 
 \cline{1-1}\cline{3-4}
-Model (3) &  & 1.603 (0.645) & 1.242 (0.246) \\ 
+Model (1) &  & 1.472 (0.650) & 1.187 (0.249) \\ 
 \cline{1-1}\cline{3-4}
-Model (4) &  & 1.502 (0.615) & 1.202 (0.239) \\ 
+Model (2) &  & 1.548 (0.602) & 1.225 (0.220) \\ 
 \hline
 DeepDTA & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Cold\\Protein\end{tabular}} & 1.085 (0.146) & 1.040 (0.146) \\ 
 \cline{1-1}\cline{3-4}
-Model (3) &  & \textbf{1.045 (0.174)} & \textbf{1.019 (0.086)} \\ 
+Model (1) &  & \textbf{0.992 (0.207)} & \textbf{0.991 (0.101)} \\ 
 \cline{1-1}\cline{3-4}
-Model (4) &  & 1.065 (0.162) & 1.029 (0.079) \\ 
+Model (2) &  & 1.064 (0.154) & 1.029 (0.077) \\ 
 \hline
 DeepDTA & \multirow{3}{*}{Cold} & \textbf{2.007 (1.223)} & \textbf{1.356 (0.410)} \\ 
 \cline{1-1}\cline{3-4}
-Model (3) &  & 2.278 (1.069) & 1.467 (0.356) \\ 
+Model (1) &  & 2.013 (0.767) & 1.395 (0.260) \\ 
 \cline{1-1}\cline{3-4}
-Model (4) &  & 2.021 (0.950) & 1.388 (0.308) \\
+Model (2) &  & 2.348 (0.978) & 1.504 (0.294) \\
 \hline
 \end{tabular}
-\label{tab:dds_mse_rmse}
+\label{tab:ddi_mse_rmse}
 \end{table}
-
