@@ -1,17 +1,1 @@
-For installation instructions refer to the FBE web page if you don't have an idea on how to use LaTeX.
-Quick tip: As of 2016 www.sharelatex.com is a very easy way of importing the fbe_thesis_2016.zip file as a project and start writing your thesis in LaTeX.
-
-Usage of LaTeX is highly recommended as it formats many of the thesis aspects without the need of consulting to the "format for theses" handbook included in FBE web page (Format.pdf).
-
-For special cases some of which are:
-Sideway figures/tables
-Punctuation rules in equations, figures, tables
-Page limitation on abstract/ozet pages
-List of symbols formatting
-In text bullet list / list numbering rules
-Figures / Tables spanning 2+ pages
-When to use CAPITAL LETTERS
-Printer guidelines
-
-you should consult the "format for theses" handbook (Format.pdf) and follow the rules listed in it.
-
+Predicting drug-target binding affinity is a critical phase in computer-aided drug design, which can help accelerate the drug development process and reduce experimental validation costs caused by the significant false-positive rates. Hence, developing in-silico computational algorithms to predict drug-target binding affinity values has become an important research area. Machine learning approaches have been proposed for this task, including models that use readily available biomolecule sequences and heterogeneous networks enriched with drug and target-related information. We present WideDeepDTA, the first study that leverages both text-based and network-based approaches and predicts drug-target binding affinities. Given homogeneous and heterogeneous networks containing multiple types of biological entities, relationships between these entities, and pre-trained language models for biomolecular language, WideDeepDTA first learns the low-dimensional feature representation of drugs and targets using the node embedding technique Metapath2Vec. Then, it predicts affinity values based on the learned features. WideDeepDTA demonstrates its ability to create rich representations in the drug-target affinity prediction task compared to one of the state-of-the-art methods, DeepDTA, on the BDB dataset in terms of concordance index and mean squared error. Experiments indicate that integrating pre-trained language models with heterogeneous information improves model performance, especially while predicting the affinity values between proteins and unseen ligands. Moreover, the results show that the model performance improves when heterogeneous graphs are empowered with the information extracted from text-based representations.
