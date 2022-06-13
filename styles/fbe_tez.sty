@@ -6,7 +6,8 @@
 %%
 %% Prepared by Feza Kerestecioglu
 %%
-%% Last modified on 25/07/2003
+%% Modified by Mehmet Can Güven
+%% Last modified on 20/06/2018
 %%
 %% COPYRIGHT 1999, 2001, 2003 by
 %% Feza Kerestecioglu <kerestec@boun.edu.tr>, <kerestec@khas.edu.tr>
@@ -388,7 +389,7 @@ Science and Engineering \\
    \let\@svsec\@empty\else
    \refstepcounter{#1}
    \ifnum#2=3
-     \edef\@svsec{\underbar{\csname the#1\endcsname.\hskip 0.5em}}
+     \def\@svsec{\underbar{\csname the#1\endcsname.\hskip 0.5em}}
      \else
      \edef\@svsec{\csname the#1\endcsname.\hskip 0.5em}\fi
    \fi
@@ -705,7 +706,7 @@ Science and Engineering \\
 \footskip=0mm
 \paperheight=296mm
 \textwidth=155mm
-\textheight=241mm
+\textheight=237mm
 \parindent=1cm
 \pagestyle{myheadings}
 %

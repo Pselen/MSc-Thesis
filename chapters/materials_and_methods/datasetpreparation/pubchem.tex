@@ -1,0 +1,6 @@
+\subsection{PubChem}
+PubChem \cite{kim2021pubchem} is an online chemistry database that contains small molecules, nucleotides, as well as information on chemical structures, identifiers, chemical and physical properties. As of February 2021, the current statistics in the database are shown in Table \ref{tab:pubchem_stats}. 
+
+\input{chapters/materials_and_methods/datasetpreparation/tables/pubchem}
+\newpage
+Since PubChem contains a considerable amount of data, other chemical databases map their entries with PubChem's Compound ID number (CID). In the context of this thesis, we leverage the PubChem CID of each chemical and map with the entries of BindingDB, SIDER, and CTD. Moreover, PubChem contains the International Chemical Identifier (InChI) of chemicals that textually identifies chemical substances. Similar to CID, We used chemicals' InChIs to relate the same chemicals across other databases, ChEMBL and DrugBank, that do not share any common IDs.

@@ -10,8 +10,8 @@
 \usepackage{color}
 \usepackage{booktabs}
 \usepackage{longtable}
-\usepackage{caption}
-\usepackage{subfigure}
+% \usepackage{caption}
+% \usepackage{subfigure}
 \usepackage{enumitem}
 \usepackage{svg}
 \usepackage{dirtree}
@@ -24,6 +24,8 @@ frame = single,
 % language=Pascal, 
 % framexleftmargin=15pt
 }
+%\usepackage[left=3.5cm, right=2cm, top=4cm, bottom=2cm]{geometry}
+            
 \graphicspath{{figures/}} % Graphics will be here
 
 \usepackage{multirow}
@@ -32,7 +34,7 @@ frame = single,
 \usepackage{algorithmic}
 %\pagestyle{empty}
 %\includeonly{introduction} % To only process the given file
-
+%\usepackage{blindtext}
 \newtheorem{thm}{Theorem}[chapter]
 \newtheorem{prop}[thm]{Proposition}
 \newtheorem{lem}[thm]{Lemma}
@@ -48,8 +50,10 @@ frame = single,
 % APPROVED BY PAGE
 \supervisor{Assoc. Prof. Arzucan \"{O}zg\"{u}r}
 \cosuperi{Assoc. Prof. Elif \"{O}zk{\i}r{\i}ml{\i} \"{O}lmez}
-\examineri{Prof. Nilg\"{u}n L\"{u}tfiye Karal{\i}\quad\quad\quad}
-\examinerii{Prof. Tunga G\"{u}ng\"{o}r}
+
+\examineri{Prof. Tunga G\"{u}ng\"{o}r}
+
+\examinerii{Prof. Nilg\"{u}n L\"{u}tfiye Karal{\i}\quad\quad\quad}
 % \examineri{Name Surname, Ph.D.}
 % \examineri{Name Surname, Ph.D.}
 %\examineriv{}
@@ -61,213 +65,43 @@ frame = single,
 \begin{document}
 
 \pagenumbering{roman}
-\makemstitle % M.S. thesis
+\makemstitle 
 \makeapprovalpage
 
 
 \input{chapters/preambles/acknowledgements}
 \input{chapters/abstract/abstract}
 \input{chapters/abstract/abstract_tr}
-
 \tableofcontents
 \listoffigures
 \listoftables
 \input{chapters/preambles/symbols}
-
 \input{chapters/preambles/abbreviations}
-
-
 \input{chapters/introduction/introduction.tex}
+
 %Start with an introduction...
 \input{chapters/literaturereview/literature.tex}
 \input{chapters/background/background}
-\input{chapters/datasetpreparation/datasetpreparation.tex}
 \input{chapters/materials_and_methods/materials_and_methods}
-%\include{experiments_results}
-\input{chapters/graphml/graphml}
 \input{chapters/results/results}
 \input{chapters/conclusion/conclusion}
-
-%\label{chapter:experiments-and-results}
-
-%Always place some text after headings before putting a graphics into
-%a section as seen in Figure \ref{fig:sample}. 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.5\columnwidth]{sample_figure.png}
-\end{center}
-\caption{Sin and
-Cosine.}
-\vskip\baselineskip % Leave a vertical skip below the figure
-\label{fig:sample}
-\end{figure}
-
-Now, let us cite some studies: one source as \cite{doebelin},  two
-sources as \cite{doebelin,exoplanetwebsite} or you may cite three or
-more sources as 
-\cite{doebelin,exoplanetwebsite,aran2007databaseofnon-manual}.\nocite{
-liudissertation} \nocite{paper-IAT-2006-labels}
-Observe that they are ordered in the references chapter in the same
-order as
-they are cited. Let us put a sample table as seen in Table
-\ref{table:sample}. Please pay attention that the caption is followed
-by a period.
-
-\begin{table}[thbp]
-\vskip\baselineskip 
-\caption[Sample table]{Sample table.}
-\begin{center}
-\begin{tabular}{|c|c|c|}\hline
- & \textbf{Header 1}& \textbf{Header 2}\\\hline
-\textbf{Row 1} & Bla bla bla& Bla bla bla \\\hline
-\textbf{Row 2} & Bla bla bla  & Bla bla bla \\\hline
-\end{tabular}
-\label{table:sample}
-\end{center}
-\end{table}
-
-
-
-Footnotes should be avoided as possible. If there is an absolute
-necessity, footnotes should be used as this.\footnote{Example of a
-footnote}
-
-Item lists may be represented as follows:
-
-\begin{itemize}
- \item This is an item. Do not use boldface for the items.
-\begin{enumerate}
- \item This is a sub-item. Subsub-items are not allowed.
-\end{enumerate}
-\item Another item.
-\end{itemize}
-%  \item 
-% \end{enumerate}
-Item lists may also be represented as follows:
-\begin{enumerate}
- \item This is another enumerated item.
-\begin{itemize}
- \item This is another sub-item.
-\end{itemize}
-
-\end{enumerate}
-
-\begin{thm}
-The solutions of the equation $ax^2+bx+c=0$ with $a\neq 0$ are
-$$
-x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}
-$$
-\end{thm}
-
-
-\begin{proof}
-We use the method of completing the square to rewrite $ax^2+bx+c$.
-\begin{align*}
-ax^2+bx+c&=a\left( x^2 + \frac{b}{a}x+\right)+c \\
-  &=a\left( x^2 + \frac{b}{a}x+ \left(\frac{b}{2a}\right)^2
-     -\left(\frac{b}{2a}\right)^2 +\right)+c \\
-  &=a\left( x+\frac{b}{2a}\right)^2 - 
-a\left(\frac{b}{2a}\right)^2+c\\
-  &= a\left( x+\frac{b}{2a}\right)^2- \frac{b^2-4ac}{4a}.
-\end{align*}
-Therefore $ax^2+bx+c=0$ can be rewritten as 
-$$
-a\left( x+\frac{b}{2a}\right)^2- \frac{b^2-4ac}{4a}=0,
-$$
-which can in turn  be rearranged as
-$$
-\left( x+\frac{b}{2a}\right)^2= \frac{b^2-4ac}{4a^2}.
-$$
-Taking square roots gives
-$$
-x+\frac{b}{2a}= \frac{\pm \sqrt{b^2-4ac}}{2a}
-$$
-which implies
-$$
-x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}
-$$
-as required.
-\end{proof}
-Finally, we will put a sample algorithm (PCA algorithm) using the
-% relevant package in a figure as shown in Figure \ref{alg:pca} and
-sample equations.
-
-% \begin{figure}[htbp]
-% \label{alg:pca}
-% \begin{center}
-% \framebox[6.0in]{\begin{minipage}[t]{5.9in}
-% \begin{algorithmic}
-% \STATE
-% \STATE \textbf{Require}  $\mathbf{s_i},\ i=1,2,\dots,N$ are normalized
- 
-% \STATE Compute the mean  $\mathbf{\bar{s}}$ using Eq. \ref{eq:mean};
-% \STATE Form the $N\times2L$ matrix $\mathbf{Q}$ as defined in Eq.
-% \ref{eq:q};
-% \IF{ $N < 2\times L$}
-% \STATE $\mathbf{Q} \Leftarrow \mathbf{Q}^T$ ;
-% \ENDIF
-% \STATE Compute the covariance matrix $\mathbf{C}_s$ using Eq.
-% \ref{eq:cov_matrix};\STATE Decompose $\mathbf{C}_s$
-%  to its eigenvectors   $\mathbf{e}_k$  and eigenvalues $\lambda_k$
-% satisfying Eq. \ref{eq:pca};
-% \IF{ $N < 2\times L$}
-% \FOR{$k=1$ to $K$}
-% \STATE $\mathbf{e}_k \Leftarrow \mathbf{Q}\mathbf{e}_k $ ;
-% \STATE $\mathbf{e}_k \Leftarrow \mathbf{e}_k/||\mathbf{e}_k|| $
-% (normalization);
-% \ENDFOR
-% \ENDIF
-% \STATE
-% \end{algorithmic}
-% \end{minipage}}
-% \end{center}
-% \caption[Principal Component Analysis Algorithm]{Principal Component
-% Analysis Algorithm.}
-% % \vskip
-% \end{figure}
-
-\begin{align} 
-\mathbf{\bar{s}} & =\frac{1}{N} \sum_{i=1}^N \mathbf{s}_i
-\label{eq:mean}   
-\\
-\mathbf{Q} & =\left[ 
-\begin{array}{cccc} 
- \mathbf{s}_1  - \mathbf{\bar{s}} & \mathbf{s}_2 - \mathbf{\bar{s}} &
-\cdots & \mathbf{s}_N  - \mathbf{\bar{s}}
-\end{array}
-\right]_{2L\times N }
-\label{eq:q}
-\\ 
-\mathbf{C}_s & =\frac{1}{N} \mathbf{Q}^T \mathbf{Q}
-\label{eq:cov_matrix}
-\end{align}
-
-\begin{equation}
-    \mathbf{C}_s \mathbf{e}_k = \lambda_k \mathbf{e}_k
-    \label{eq:pca}
-\end{equation}
-
-\subsection{Example of First Subheadings}
-Some text here
-% \subsubsection{Example of Second Subheadings}
-% Some text here too.
-\chapter{CONCLUSION}
-\label{chapter:conclusion}
-
-The conclusions of the thesis should come
-here.
-% \nocite{NewEntry1,NewEntry2,NewEntry3,NewEntry4,NewEntry5,
-% NewEntry6,
-% NewEntry7,NewEntry8,NewEntry9,NewEntry10,NewEntry11,NewEntry12}
-
-%\cite{*}
 \bibliographystyle{styles/fbe_tez_v11}
 \bibliography{references}
-
 \appendix
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+\input{chapters/appendix/appendix}
+% \vskip\baselineskip % Leave a vertical skip below the figure
+=======
+>>>>>>> Stashed changes
 
 \chapter{APPLICATION}
 The appendices start here.
 \input{chapters/appendix/appendix}
+<<<<<<< Updated upstream
+=======
+>>>>>>> d09ebba9e602d1522ef9361417dc21d129009597
+>>>>>>> Stashed changes
 
 \end{document}

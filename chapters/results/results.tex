@@ -1,17 +1,172 @@
 \chapter{RESULTS}
-
+\label{results}
 \section{Evaluation}
+<<<<<<< Updated upstream
 Representation vectors for chemicals and proteins obtained using the aforementioned models and graphs, and then these vectors evaluated in the drug-target affinity task with the DeepDTA model using the BDB dataset. The DeepDTA model represents proteins using amino acid sequences and chemicals using characters of the SMILES notations. In this study, the DeepDTA model has been updated, as shown in Figure 3.3, to take as input the representation vectors containing additional information in the generated graphs. The performance of the model is measured by the Concordance Index (CI),  Mean Squared Error (MSE), Root Mean Squared Error (RMSE), and $R2$ metrics. 
-
-% explain metrics with formula
-
-\section{Experimental Setup}
-
-As the training and test folds we use the same setup used in DeepDTA \cite{ozturk2018deepdta}. We train each model 5 times with the training set folds, then measure the performance on each test set, and report the average results on BDB. BDB dataset contains 5 different training sets and corresponding 4 different test sets as warm, cold ligand, cold protein and cold. The cold test sets contain data that was not used during the training of the model. We compute CI, MSE, RMSE, and $R^2$ scores of each model and report with the standard deviation.
-
+=======
+<<<<<<< HEAD
+Representation vectors for chemicals and proteins were obtained using eighteen different models, and then these vectors were evaluated in the drug-target affinity task with the WideDeepDTA model using the BDB dataset. The DeepDTA \cite{ozturk2018deepdta} model represents proteins using amino acid sequences and chemicals using characters of the SMILES notations. In this study, the DeepDTA model has been updated, as shown in Figure \ref{fig:widedeepdtamodel}, to take as input the representation vectors containing additional information in the generated graphs. The model's performance is measured by the CI,  MSE, RMSE, and $R^2$ metrics. 
 
 \section{Model Comparisons}
+This section lists the details of experiments and the trained models. Then, compare the results with the DeepDTA model. 
 
+\paragraph{Ligand representation through homogeneous graphs}
+First, we generate homogeneous graphs with only one node and edge type, \textit{i.e.}, drugs, and interaction between drugs, respectively. Then test the WideDeepDTA performance for the ligand representation with and without empowered homogeneous graphs.
+
+\newpage
+\begin{itemize}
+    \item \textbf{Model (1)}: A Drug-Drug Interaction (DDI) graph is created, the nodes of which are formed by all drugs (D) and the edges by interactions (D-D) between these drugs.   
+    \item \textbf{Model (2)}: A second DDI graph consists of drug nodes, and D-D edges is created similarly. Moreover, it is empowered with the knowledge of initial embeddings of the ChemBERTa model.
+    \item \textbf{Model (3)}: A Drug-Drug Similarity (DDS) graph is created, the nodes of which are formed by all drugs (D) and the edges by Jaccard similarity between these drugs. 
+    \item \textbf{Model (4)}: A second DDS graph is created similar to Model (3). The model is initialized with the ChemBERTa embeddings.
+\end{itemize}
+
+We first test the impact of ligand representation using homogeneous graphs by creating two different models with two different versions. Model (1) represents each drug with a 32-dimensional vector in which they are initialized as samples from a uniform distribution over $[0, 1)$ and trained by the Metapath2Vec model on DDI relation, and Model (2) represents each drug with the same dimensional size vector; however, Metapath2Vec model's embeddings are initialized as ChemBERTa embeddings of corresponding ligands. On the other hand, Model (3) and Model (4) are trained on DDS relation with the same setup, \textit{i.e.,} Model (3) is initialized randomly, and Model (4) is initialized with ChemBERTa embeddings.
+
+\input{chapters/results/tables/comparison_tables/ddi_dds/ddi_dds_warm}
+
+\newpage
+The scores regarding the comparison of these four models are shown in Table \ref{tab:ddi_vs_dds_warm}, Table \ref{tab:ddi_vs_dds_cold_prot}, Table \ref{tab:ddi_vs_dds_cold_ligand}, and Table \ref{tab:ddi_vs_dds_cold_both}. For the relation-oriented tables please refer to the Appendix \ref{app:homogeneous_ligand}. Considering the results shown in Table \ref{tab:ddi_vs_dds_warm}; 
+\begin{itemize} % scarce oldugunda heterojen zorlanabilir, yeni veride, sim ile blabiliyorum.. 
+    \item DDS (Model 3-Model 4) models outperform the DeepDTA model; thus, using text-based information in the graph improves the overall performance. 
+    \item Using PLMs for drugs improves the performance compared to the random initialization since it increases the performance for three out of four metrics for both the DDI and DDS model (Model 2-Model 4).
+    \item DDI models and DDS models perform similarly on the warm test set of BDB, \textit{i.e.}, their trends are the same for the same performance metrics. For instance, the $R^2$ score for models with PLMs (Model 2-Model 4) is higher than the randomly initialized models (Model 1-Model 3); likewise, MSE and RMSE values are lower for the same case. Therefore, if the drug-drug interaction data is scarce, we recommend employing the text-based similarity measures between two drugs while using empowered homogeneous graphs on the warm test set of BDB.
+\end{itemize}
+
+\input{chapters/results/tables/comparison_tables/ddi_dds/ddi_dds_cold_protein}
+
+\newpage
+While learning the graph-based representations with DDI and DDS models, we leverage only the drug-related information. So, we do not integrate any protein-related information and set all the protein representations as zeros. To predict the affinity values model employs the protein embeddings learned from the CNN-based part using the protein sequence and the ligand embeddings learned from CNN-based and graph-based parts. Considering the results shown in Table \ref{tab:ddi_vs_dds_cold_prot}, all the models outperform the DeepDTA model for the interaction prediction task with unknown proteins. Therefore, integrating drug information into the graph for the known ligands increases the performance. However, compared to the improvement on the warm test set, using PLMs lowered the evaluation scores on the cold protein test set.
+
+Taking into account the results shown in Table \ref{tab:ddi_vs_dds_cold_ligand} and Table \ref{tab:ddi_vs_dds_cold_both}, adding drug-related information using the homogeneous or empowered homogeneous graph did not improve the performance for the cold ligand and cold both test cases. This result is expected since cold both test sets are challenging and show low scores for all the metrics. 
+
+On the other hand, the cold both test set's results are slightly better than the cold ligand test set's results due to the performance improvement of cold proteins. As opposed to the previous observation, PLMs improved the performance of the DDS models on both of the test sets. 
+
+\input{chapters/results/tables/comparison_tables/ddi_dds/ddi_dds_cold_ligand}
+\input{chapters/results/tables/comparison_tables/ddi_dds/ddi_dds_cold_both}
+
+\newpage
+To sum up, 7 out of 16 models outperformed the DeepDTA model, and 4 out of 8 models improved homogeneous graphs with language models. To predict the affinity values between known biomolecules, we recommend using Model (4), which integrates language models and text-based features into homogeneous graphs since it shows the best performance. In the case of cold ligand and cold both test sets, the usage of PLMs with homogeneous graphs is promising; however, it still has room for improvement. Moreover, if the interaction data is not available for drugs, we suggest using sequence similarity between drugs in the homogeneous graphs since both models perform similarly and provide more information to the representation than DDI in the warm test set.  
+
+\paragraph{Homogeneous protein representation}
+Second, we generate homogeneous graphs with only one node and edge type; proteins, and interaction between proteins, respectively. Then test the WideDeepDTA performance for the protein representation with and without empowered homogeneous graphs.
+
+\begin{itemize}
+    \item \textbf{Model (5)}: A Protein-Protein Interaction (PPI) graph is created, the nodes of which are formed by all proteins (P) and the edges by interactions (P-P) between these proteins.   
+    \item \textbf{Model (6)}: A second PPI graph consists of protein nodes, and P-P edges are created similar to Model (5). Moreover, it is empowered with the knowledge of initial embeddings of the ProtBERT model.
+    \item \textbf{Model (7)}: A Protein-Protein Similarity (PPS) graph is created, the nodes of which are formed by all proteins belonging to the human species (P) and the edges formed by the Jaccard similarities (P-P) between the amino acid sequences of these proteins.
+    \item \textbf{Model (8)}: A second PPS graph is created similar to Model (7). The model is initialized with the ProtBERT model.
+\end{itemize}
+
+First, we test the impact of protein representation using homogeneous graphs by creating two different models with two different versions. Model (5) represents each protein with a 32-dimensional vector in which they are initialized as samples from a uniform distribution over $[0, 1)$ and trained by the Metapath2Vec model on PPI relation, and Model (6) represents each protein with the same dimensional size vector. However, the Metapath2Vec model's embeddings are initialized as ProtBERT embeddings of corresponding proteins. (For the detailed results please refer to the Appendix \ref{app:homogeneous_protein} and see Table \ref{tab:ppi_ci_r2} and Table \ref{tab:ppi_mse_rmse}.) On the other hand, Model (7) and Model (8) are trained on PPS relation with the same setup. Model (7) is initialized randomly, and Model (8) is initialized with ProtBERT embeddings.(For the detailed results please refer to the Appendix \ref{app:homogeneous_protein} and see Table \ref{tab:pps_ci_r2} and Table \ref{tab:ppse_mse_rmse}.)
+
+
+The results regarding the comparison of these four models are shown in Table \ref{tab:ppi_vs_pps_warm}, Table \ref{tab:ppi_vs_pps_cold_protein}, Table  \ref{tab:ppi_vs_pps_cold_ligand}, and Table \ref{tab:ppi_vs_pps_cold_both}. Considering the results shown in Table \ref{tab:ppi_vs_pps_warm};
+\begin{itemize}
+    \item Homogeneous graphs empowered by language models and text-based features generated (Model 8) adds more information to the representation of proteins compared to the homogeneous graphs empowered by only language models (Model 6) on warm test set. 
+    \item Homogeneous and language model-empowered homogeneous graphs generated by PPI relation perform similarly on the warm test set. So, language models do not improve the performance of PPI models on the warm test set.  
+\end{itemize}
+
+\input{chapters/results/tables/comparison_tables/ppi_pps/ppi_pps_warm}
+
+\input{chapters/results/tables/comparison_tables/ppi_pps/ppi_pps_cold_prot}
+
+\newpage
+Considering the results shown in Table \ref{tab:ppi_vs_pps_cold_protein}, and comparing with the previous observations, language model-empowered graphs generated by PPS relation did not work well in the case of cold proteins. It may be caused by the long sequence of proteins and ProtBERT's inability to generate good representations for proteins as initial embedding. So, adding language-based information to the graph does not improve the performance of the unseen proteins, and we recommend continuing with the simpler version (Model 7) since adding PLM information for proteins adds memory and execution time overheads due to the longer amino acid sequences. However, homogeneous graphs and homogeneous graphs empowered by language models and text-based features still outperform the DeepDTA model.
+
+\input{chapters/results/tables/comparison_tables/ppi_pps/ppi_pps_cold_ligand}
+
+\newpage
+Taking into consideration the results shown in Table \ref{tab:ppi_vs_pps_cold_ligand} and Table \ref{tab:ppi_vs_pps_cold_both}, adding protein-related information using the language model and text-based feature-empowered homogeneous graph (Model 8) improve the performance and outperforms DeepDTA for the cold ligand and cold both test cases. To sum up, 6 out of 16 models outperformed the DeepDTA model, and 5 out of 8 models improved homogeneous graphs with language models. To predict the affinity values in all kinds of test sets, we recommend using Model (8), which integrates language models and text-based features into homogeneous graphs since it shows the best performance. Moreover, the usage of PLMs with homogeneous graphs is promising since it shows a performance improvement. However, PLMs do not affect the model performance when the test set contains unknown proteins since they hardly represent the long sequences.
+\input{chapters/results/tables/comparison_tables/ppi_pps/ppi_pps_cold_both}
+\paragraph{Heterogeneous representations with disease information}
+After completing experiments with homogeneous graphs, we continue with the heterogeneous graph experiments. We start with generating heterogeneous graphs with several nodes and edge types. We represent drugs, diseases, and proteins as nodes; drug-disease associations and protein-disease associations as edges. Then test WideDeepDTA performance for both ligand and protein representations.
+
+\begin{itemize}
+    \item \textbf{Model (9)} A Drug-Disease Association (DDiA) graph is created, with drug (D) and disease (Di) nodes, and the edges by association (D-Di) between them.  
+    \item \textbf{Model (10)} A DDiA graph is created similar to Model (9), this time with the knowledge of initial embeddings of ChemBERTa and BioBERT models for SMILES sequences and disease names, respectively.
+    \item \textbf{Model (11)} A Protein-Disease Association (PDiA) graph is created, the nodes of which are formed by all proteins (P) and diseases (Di) and the edges by association (P-Di) between these proteins and diseases.  
+    \item \textbf{Model (12)} A PDiA graph is created similar to Model (11), this time with the knowledge of initial embeddings of ProtBERT and BioBERT models for protein amino acid sequences and disease names, respectively. 
+    \item \textbf{Model (13)} A Drug-Disease-Protein Association (DDiPA) graph is created, the nodes of which are formed by all drugs (D), diseases (Di), proteins (P), and the edges by association (D-Di-P) between these drugs, proteins, and diseases.  
+    \item \textbf{Model (14)} A DDiPA graph is created similar to Model (13), with the initial embeddings of ChemBERTa, BioBERT, and ProtBERT models for SMILES sequences, protein amino acid sequences, and disease names, respectively. 
+\end{itemize}
+
+
+First, we test the impact of disease information on the protein and ligand representations using heterogeneous graphs by creating two different models with two different versions. Model (9) represents each ligand with a 32-dimensional vector in which they are sampled from a uniform distribution over $[0, 1)$ and trained by the Metapath2Vec model on DDiA relation, and Model (10) represents each ligand with the same dimensional size vector; however, Metapath2Vec model's embeddings are initialized as ChemBERTa embeddings of corresponding ligands, and BioBERT embeddings of related diseases' name. (For the detailed results please refer to the Appendix \ref{app:heterogeneous_disease} and see Table \ref{tab:ddia_ci_r2} and Table \ref{tab:ddia_mse_rmse}).
+
+Model (11) represents each protein with a 32-dimensional vector in which they are initialized as samples from a uniform distribution over $[0, 1)$ and trained by Metapath2Vecmodel on PDiA relation, and Model (12) represents each protein with the same dimensional size vector; however, Metapath2Vec model's embeddings are initialized as ProtBERT embeddings of corresponding proteins, and BioBERT embeddings of related diseases' name. (For the detailed results please refer to the Appendix \ref{app:heterogeneous_disease} and see Table \ref{tab:pdia_ci_r2} and Table \ref{tab:pdia_mse_rmse}). Finally, we combine these two separate heterogeneous graphs and create one large heterogeneous graph, DDiPA, to test the effect of heterogeneous and empowered heterogeneous graphs on the ligand and protein representations together. Similarly, DDiPA has two models, Model (13) and Model (14). On Model (13), Metapath2Vec is trained on randomly initialized embeddings of each drug, protein, and disease, whereas, on Model (14), Metapath2Vec is trained on embeddings loaded using PLMs of ChemBERTa, ProtBERT, and BioBERT for each drug, protein, and disease, respectively.
+
+\input{chapters/results/tables/comparison_tables/disease/warm}
+
+\newpage
+The results regarding the comparison of these six models are shown in Table \ref{tab:disease_warm}, Table \ref{tab:disease_cold_protein}, Table  \ref{tab:disease_cold_ligand}, and Table \ref{tab:disease_cold_both}. Considering the results shown in Table \ref{tab:disease_warm};
+
+\begin{itemize}
+    \item Considering the DDiA alone, PLMs did not improve the drug representations according to all the metrics except the CI value since it gives the highest score for the warm test set. On the other hand, PLMs increase the performance score since language model-empowered heterogeneous graphs of PDiA perform better than simple heterogeneous graphs. 
+    \item Both DDiA and PDiA models perform better than the DeepDTA model so that we can observe the importance of disease-related information on the heterogeneous graphs. However, using the protein-disease and drug-disease information in the same heterogeneous graph lowers the overall performance compared to PDiA and DDiA models. 
+\end{itemize}
+>>>>>>> Stashed changes
+
+\input{chapters/results/tables/comparison_tables/disease/cold_protein}
+
+Considering the results shown in Table \ref{tab:disease_cold_protein}, adding PLMs to the heterogeneous graphs lowers the performance of DDiA and PDiA models; however, it increases the performance of DDiPA model on the cold protein test set. Still, DDiPA models underperform the other two models and the DeepDTA model.
+
+\input{chapters/results/tables/comparison_tables/disease/cold_ligand}
+
+\newpage
+Regarding the results shown in Table \ref{tab:disease_cold_ligand}, as opposed to above mentioned observations, adding PLM to the heterogeneous graphs increased the performance of all of the three models on the cold ligand test set. Similarly, DDiPA performance is the lowest one, except for the CI metric. 
+
+<<<<<<< Updated upstream
+\section{Model Comparisons}
+
+=======
+
+Taking into account the results shown in Table \ref{tab:disease_cold_both}, adding disease-related information using the empowered heterogeneous graph generated by PDiA and DDiPA improve the performance for the cold both test cases. However, the empowered heterogeneous graph generated by DDiA did not show any improvement. We can conclude that combining two different heterogeneous data sources does not improve the overall performance as much as using these sources separately. Moreover, disease information is essential; thus, it can be employed to enrich the ligand and protein representations.
+=======
+Representation vectors for chemicals and proteins obtained using the aforementioned models and graphs, and then these vectors evaluated in the drug-target affinity task with the DeepDTA model using the BDB dataset. The DeepDTA model represents proteins using amino acid sequences and chemicals using characters of the SMILES notations. In this study, the DeepDTA model has been updated, as shown in Figure 3.3, to take as input the representation vectors containing additional information in the generated graphs. The performance of the model is measured by the Concordance Index (CI),  Mean Squared Error (MSE), Root Mean Squared Error (RMSE), and $R2$ metrics. 
+>>>>>>> d09ebba9e602d1522ef9361417dc21d129009597
+
+\input{chapters/results/tables/comparison_tables/disease/cold}
+
+To sum up, 11 out of 24 models outperformed the DeepDTA model, and 9 out of 12 models improved heterogeneous graphs with language models. To predict the affinity values in warm and cold both test sets, we recommend using Model (9) and Model (12). Since combining two different heterogeneous data sources does not improve the overall performance as much as using these sources separately. For the cold test sets, integrating disease information into heterogeneous graphs increase the ability to predict affinity values between unknown biomolecules. Moreover, the usage of PLMs with heterogeneous graphs of PDiA and DDiPA is promising since we observe performance improvement. 
+
+% \newpage
+\paragraph{Heterogeneous representations with side effect information}
+As the second heterogeneous graph experiment, we generate heterogeneous graphs with drugs and side effects as nodes, the interaction between drugs, and the association between drugs and side effects as edges. Then test WideDeepDTA performance for ligand representations.
+
+\begin{itemize}
+    \item \textbf{Model (15)} A DSA (Drug-Side Effect Association) graph is created, the nodes of which are formed by all drugs (D), and side effects (S) and the edges by association (D-S) between these drugs and side effects.  
+    \item \textbf{Model (16)} A DSA graph is created similar to Model (15), this time initialized with the embeddings of ChemBERTa and BioBERT models for SMILES sequences and side effect names, respectively.
+    \item \textbf{Model (17)} A DDI-DSA (Drug-Drug Interaction \& Drug-Side Effect Association) graph is created, the nodes of which are formed by all drugs (D), and side effects (S) and the edges by association (D-D and D-S) between these drugs and side effects.  
+    \item \textbf{Model (18)} A DDI-DSA graph is created similar to Model (17), initialized with the embeddings of ChemBERTa and BioBERT models for SMILES sequences and side effect names.
+\end{itemize}
+
+<<<<<<< HEAD
+\newpage
+First, we test the impact of side effect information on the ligand representations using heterogeneous graphs by creating two different models with two different versions. Model (15) represents each ligand with a 32-dimensional vector in which they are initialized as samples from a uniform distribution over $[0, 1)$ and trained by the Metapath2Vec model on DSA relation, and Model (16) represents each ligand with the same dimensional size vector; however, Metapath2Vec model's embeddings are initialized as ChemBERTa embeddings of corresponding ligands, and BioBERT embeddings of corresponding side effects' name. (For the detailed results please refer to the Appendix \ref{app:heterogeneous_side_effects} and see Table \ref{tab:dsa_ci_r2} and Table \ref{tab:dsa_mse_rmse}). Model (17) represents each drug with a 32-dimensional vector in which they are initialized as samples from a heterogeneous graph that includes the combination of DDI and DSA relations. Furthermore, Model (18) represents each drug with the same dimensional size vector; however, the Metapath2Vec model's embeddings are initialized as ChemBERTa embeddings of corresponding ligands and BioBERT embeddings of corresponding side effects' names. (For the detailed results please refer to the Appendix \ref{app:heterogeneous_side_effects} and see Table \ref{tab:ddi_dsa_ci_r2} and Table \ref{tab:ddi_dsa_mse_rmse}). With one large heterogeneous graph, we test the effect of heterogeneous and empowered heterogeneous graphs on the ligand representations. 
+
+\input{chapters/results/tables/comparison_tables/se/warm}
+
+\newpage
+The results regarding the comparison of these four models are shown in Table \ref{tab:side_warm}, Table \ref{tab:side_protein}, Table  \ref{tab:side_ligand}, and Table \ref{tab:side_cold}. Considering the results shown in Table \ref{tab:side_warm};
+
+\begin{itemize}
+    \item In the case of DSA relation, the addition of PLM information to the heterogeneous graph did not improve the performance. However, when we combine DSA relation with DDI relation, it increases the performance for all four metrics. 
+    \item Side effect information contributes more to the ligand representation when it is the only relation type. So, using it with DDI in the heterogeneous graph did not improve the performance on the warm test set.
+\end{itemize}
+
+Considering the results shown in Table \ref{tab:side_protein}, Table \ref{tab:side_ligand}, and Table \ref{tab:side_cold}, empowered heterogeneous graphs with DDI and DSA relations increased the performance. However, similar to the previous observation, PLMs did not increase the performance of the DDI Models. 
+
+% \newpage
+\input{chapters/results/tables/comparison_tables/se/protein}
+\input{chapters/results/tables/comparison_tables/se/ligand}
+\input{chapters/results/tables/comparison_tables/se/cold}
+
+To sum up, 9 out of 16 models outperformed the DeepDTA model, and 4 out of 8 models improved heterogeneous graphs with language models. Results of using DSA and DDI-DSA models with heterogeneous and empowered heterogeneous graphs suggest integrating side effect-related information while using all the test sets except the warm test set. For all the test sets, the usage of PLMs with heterogeneous graphs generated by DDI-DSA shows remarkable performance improvement compared to the heterogeneous graphs generated by DSA relation only.
+=======
+\section{Model Comparisons}
+
+>>>>>>> Stashed changes
 \paragraph{Homogeneous ligand representation}
 First, we generate homogeneous graphs with only one node and edge type, then test WideDeepDTA performance for the ligand representation.
 
@@ -98,11 +253,24 @@ Fourth, we generate heterogeneous graphs with several node and edge types, then 
 \end{itemize}
 
 Finally, we generate heterogeneous graphs with several node and edge types, then test WideDeepDTA performance for the both ligand and protein representation.
+<<<<<<< Updated upstream
+=======
+>>>>>>> d09ebba9e602d1522ef9361417dc21d129009597
+>>>>>>> Stashed changes
 
 \begin{itemize}
     \item \textbf{Model (13)} A DDiPA (Drug-Disease-Protein Association) graph is created, the nodes of which are formed by all drugs (D), diseases (Di), proteins (P) and the edges by association (D-Di-P) between these drugs, proteins, and diseases.  
     \item \textbf{Model (14)} A DDiPA graph is created similar to Model (13), this time with the knowledge of initial embeddings of ChemBERTa, BioBert, and ProtBERT models for SMILES sequences, protein amino acid sequences, and disease names.
 \end{itemize}
 
+<<<<<<< Updated upstream
 \input{chapters/results/tables/result/ddipa_ci_r2}
 \input{chapters/results/tables/result/ddipa_mse_rmse}
+=======
+<<<<<<< HEAD
+% My overall comment is that, the result section could benefit from a little diversity. All paragraphs are like following a template with the same sentences and everything. I recommend changing that. Plus, try to come up with comments and explanations after stating what the table says. I am more interested in "your results" than the "table results". If you don't have data backed conclusions, say your comments and views. You can also add some references if similar results are observed before. That would help, too.
+=======
+\input{chapters/results/tables/result/ddipa_ci_r2}
+\input{chapters/results/tables/result/ddipa_mse_rmse}
+>>>>>>> d09ebba9e602d1522ef9361417dc21d129009597
+>>>>>>> Stashed changes

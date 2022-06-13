@@ -1,1 +1,52 @@
 \chapter{CONCLUSION}
+\label{chapter:concluion}
+
+The drug design pipeline is a labor-intensive, time-consuming, and expensive process that relies heavily on discovering novel drug-target interactions. An important step in this pipeline is to find the high-affinity chemical-protein pairs in pre-clinical studies. Computer-aided drug design is a promising research area that uses high-performance computers to simulate this drug design process. This simulation predicts binding affinity values for chemical-protein pairs with successful in silico experiments, speeding up the drug development process and reducing resource consumption. 
+
+Recently, deep learning approaches have been utilized to predict binding affinities due to the increased availability of publicly available data in drug-target-related databases. Most studies concentrate on using the primary information of biomolecules, such as text representation, while some concentrate on integrating several data sources using heterogeneous graph structures, in which both models show performance improvement. 
+% We proposed an approach that combines these two strategies and incorporates heterogeneous drug and protein-related information with language model-based and text-based information to better represent drugs and targets.
+
+% We employed a heterogeneous network-based approach to represent these vast data in the Euclidean space by learning the distributed vectors.
+
+% \section{Contributions}
+
+%
+This thesis proposed WideDeepDTA, a drug-target affinity prediction framework that leverages heterogeneous networks empowered with text-based biomolecule representations. Given homogeneous or heterogeneous networks containing multiple types of biological entities, relationships between these entities, and pre-trained biomolecular language models, WideDeepDTA learns low-dimensional biomolecule representations and predicts chemical-protein affinities.
+
+% This thesis exploits 1D representations of biomolecules since they are easy to process as well as the easily available information in databases; biomolecule interactions, associated diseases, and side effects. While processing the 1D representations, we leverage biomolecular language processing and employ language-model based approaches, also the text-based approaches since these sequences are information-rich.
+
+We constructed heterogeneous networks that contain drugs, proteins, diseases, and side effects in WideDeepDTA and enriched these networks with language models and 1D biomolecule sequence similarity information in the experiments. We evaluated learned feature representations on BDB dataset using warm, cold ligand, cold protein, and cold both test tests. The experiments highlight that;
+
+\begin{enumerate}
+    \item A novel DTA prediction framework in which homogeneous and heterogeneous networks are empowered with biomolecule sequence similarity and language models is proposed. We use 1D representations of biomolecules since they are information-rich and, unlike 2D molecular graphs or 3D structures, easily acquired and processed \cite{flam2021keeping}.
+    \item Employing disease and side effect relations in the graphs and empowering these relations with language models yields the largest improvement over baseline, especially for unseen biomolecules. 
+    \item Using 1D similarity of biomolecules outperforms biomolecule interaction information in homogeneous graphs, indicating that 1D similarity of chemicals, which is easy to obtain, can compensate for the need for experimental drug-drug interaction data for affinity prediction. This would be useful, especially when predicting the affinities of a novel chemical with other proteins. 
+    \item Using ligand-based relations in the graphs increases the WideDeepDTA model's ability to generate better representations for unseen proteins. 
+    \item Using protein-based relations in the graphs increases the WideDeepDTA model's ability to generate better representations for unseen ligands.
+    \item Experiments performed with the language model-empowered heterogeneous graph of drug-drug interaction with drug-side effect association relations gives the best score for the cold ligand and cold both test sets. Thus, increasing the heterogeneity of the graph with ligand-oriented information increases the WideDeepDTA model's ability to generate better representations for ligands. 
+    \item Experiments demonstrate that model with the language model-empowered heterogeneous graph of protein-disease association gives the best scores on the warm and cold protein test sets. Thus, increasing the heterogeneity of the graph with protein-oriented information increases the WideDeepDTA model's ability to generate better representations for proteins.
+    \item Heterogeneous networks are empowered with pre-trained language models and improved performance for 28 out of 36 models. In general, WideDeepDTA outperforms the DeepDTA model for 33 out of 72 models. This shows the WideDeepDTA's promising ability to represent chemicals and proteins better. 
+\end{enumerate}
+
+
+
+\section{Future Directions}
+Integrating sequence similarity-based information to graphs improved the models on the chemical-protein affinity prediction task. However, finding text-based similar protein pairs is challenging and time-consuming due to long amino acid sequences. The limited number of protein-protein similarity data limits WideDeepDTA's overall performance.
+
+We showed that using additional information in the heterogeneous graph increases the WideDeepDTA's representation performance. However, we also found out that adding unrelated information to a graph decreases the performance. Considering the ligands, adding protein-related information to a simple graph decreases the model's ability to represent ligands compared to the simple graph.
+
+Overall, heterogeneous networks empowered with language models give the best results compared to baseline. Also, the experiments revealed limitations of heterogeneous networks' with pre-trained language models to represent the long protein sequences \cite{choromanski2020rethinking} compared to short SMILES strings of drugs. 
+
+Moreover, integrating text-based features into graphs is promising in the chemical-protein prediction task. We encourage further studies to integrate more text-based features into the graphs. One further improvement would be handling the 1D sequences of biomolecules as documents, representing the words of these documents as entities in the graph. Then, applying natural language processing techniques with nodes of graphs would improve performance considering the simple Jaccard similarity method's demonstrated success on the homogeneous graph.
+
+WideDeepDTA enables the generation of better representations of unknown proteins through ligand-based relations and vice versa. Introducing diverse biomolecule-based information to the graphs would enable more informative representations of novel chemicals and proteins, thus supporting the drug discovery pipeline. 
+
+
+%We observe that integrating pre-trained language models into networks improves model performance, especially while testing unseen ligands. On the other hand, pre-trained language models add overhead to the model while testing unseen proteins yielding lower performance. Moreover, the results show that the model performance increases if the heterogeneity of the graph increases in the presence of the same node types. For instance, combining the drug-drug interaction graph with the drug-side effect graph improves the model's overall performance, thus generating richer representation for drugs; however, adding protein-disease association relation to the drug-disease association graph diminishes the performance and fails even generate sufficiently enough representation. Besides that, combining heterogeneous networks with features extracted from text representations shows improvement. Additionally, we observe that using text similarity relations between entities of the graph yields similar results with interaction information proved at the laboratories. 
+
+
+% You need  "future work" and  "outlook" paragraphs here. 
+
+% Future work: "These directions need exploration to ovecome limiataions bla bla bla" 
+
+% Outlook: We did this for this purpose and it shows promise. We think it would affect this in the big picture and so on.
